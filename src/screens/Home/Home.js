@@ -2,11 +2,13 @@ import React from 'react'
 import { StatusBar } from 'expo-status-bar';
 import { useState, useEffect } from 'react';
 import { StyleSheet, Text, ScrollView, Image, TouchableHighlight, Button } from 'react-native';
-import { Card } from '../../components/Card';
+import { CardPaper } from '../../components/CardPaper';
 import { Title } from '../../components/Title';
-
+import { useSelector } from 'react-redux';
 
 const Home = ( { navigation } ) => {
+  // const { product } = useSelector( (state) => state.product);
+  // console.log(product);
   const [color, setColor] = useState(false);
   const onChangeColor = () => {
     setColor(!color);
@@ -17,9 +19,7 @@ const Home = ( { navigation } ) => {
     const { products } = await response.json();
     setProducts(products)
   }
-  const handleNavigate = () => {
-    navigation.navigate('Product detail');
-  }
+  
   useEffect(() => {
     getProducts()
   }, [])
@@ -27,7 +27,7 @@ const Home = ( { navigation } ) => {
 
   return (
     <ScrollView style={ color ? styles.container : styles.containerBlue }>
-      <Text style={{color: 'red'}} onPress={onChangeColor} >React advanced</Text>
+      <Text style={{color: 'red'}} onPress={onChangeColor} >Cambiar color</Text>
       <TouchableHighlight
         activeOpacity={0.6}
         underlayColor="#DDDDDD"
@@ -35,21 +35,10 @@ const Home = ( { navigation } ) => {
       >
         <Text>Touch here</Text>
       </TouchableHighlight>
-      <Image
-          source={{
-            uri: 'https://reactnative.dev/docs/assets/p_cat2.png',
-          }}
-          style={styles.imageCat}
-        />
-      <Button
-        onPress={handleNavigate}
-        title="Learn More"
-        color="#841584"
-      />
-      <Title titulo='React avanzado' />
+      <Title titulo='e-commerce' />
       {
         products.map(product => (
-          <Card {...product} key={product.id} />
+          <CardPaper {...product} key={product.id} />
         ))
       }
       <StatusBar style="auto" />

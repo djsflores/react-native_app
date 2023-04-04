@@ -1,11 +1,14 @@
 import React from 'react'
-import { ScrollView, Text } from 'react-native'
+import { View, Text } from 'react-native'
+import { Button } from 'react-native-paper';
 
-const ProductDetail = () => {
+const ProductDetail = ( { navigation } ) => {
+
   return (
-    <ScrollView>
-      <Text>Product detail</Text>
-    </ScrollView>
+    <View>
+      <Text>Detalle</Text>
+      <Button onPress={ () => navigation.goBack() } >Volver al home</Button>
+    </View>
   )
 }
 
